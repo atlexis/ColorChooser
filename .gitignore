@@ -1,0 +1,7 @@
+# Compiled class file
+*.class
+
+#Eclipse files
+.classpath
+.project
+.settings
