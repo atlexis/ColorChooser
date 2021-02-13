@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="ColorChooser" name="ColorChooser">
+	<property name="src" location="src" />
+	<property name="bin" location="bin" />
+	<property name="jar" location="jar" />
+
+	<!-- Creates src, bin, and jar folder if not existing -->
+	<target name="init">
+		<mkdir dir="${src}"/>
+		<mkdir dir="${bin}"/>
+		<mkdir dir="${jar}"/>
+	</target>
+
+	<!-- Compile code using default compiler -->
+	<target name="compile" depends="init">
+		<javac includeantruntime="false" srcdir="${src}" destdir="${bin}" />
+	</target>
+
+	<!-- Run code from ColorChooser using default runtime -->
+	<target name="ColorChooser" depends="compile">
+		<java classname="mainPackage.ColorChooserMain" fork="true">
+			<classpath path="${bin}"/>
+		</java>
+	</target>
+
+	<!-- Build executable jar file -->
+	<target name="jar" depends="compile">
+		<jar destfile="${jar}/ColorChooser.jar" basedir="${bin}">
+			<manifest>
+				<attribute name="Main-Class" value="mainPackage.ColorChooserMain"/>
+			</manifest>
+		</jar>
+	</target>
+
+	<!-- Remove build files -->
+	<target name="clean">
+		<delete dir="${bin}" />
+	</target>
+</project>

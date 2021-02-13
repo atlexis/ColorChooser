@@ -13,7 +13,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 @SuppressWarnings("serial")
-public class ColorChooserAlphaCSS extends JPanel {
+public class ColorChooserAlphaCSS extends ColorChooser {
 	
 	private int red;
 	private int green;

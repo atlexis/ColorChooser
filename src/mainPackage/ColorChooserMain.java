@@ -1,6 +1,5 @@
 package mainPackage;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -20,18 +19,18 @@ import javax.swing.SwingUtilities;
  */
 @SuppressWarnings("serial")
 public class ColorChooserMain extends JFrame {
-	
+
 	private JMenuBar menuBar;
 	private JMenu menu;
 	private ArrayList<JMenuItem> menuItems;
 	private int currentPanelIndex = 0;
-	
-	private Component currentPanel;
-	
+
+	private ColorChooser currentPanel;
+
 	public ColorChooserMain() {
 		initMenu();
 		
-		currentPanel = new ColorChooser(); //Starts normal mode
+		currentPanel = new ColorChooserNormal(); //Starts normal mode
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		add(currentPanel);
@@ -44,7 +43,7 @@ public class ColorChooserMain extends JFrame {
 	}
 	
 	/**
-	 * Initializes a menu with three items with corresponding key-commands
+	 * Initializes a menu with three items and corresponding key-commands
 	 */
 	private void initMenu() {
 		menuBar = new JMenuBar();
@@ -91,7 +90,7 @@ public class ColorChooserMain extends JFrame {
 	public void actionPerformed(ActionEvent e) {
 		remove(currentPanel);
 		if (e.getSource().equals(menuItems.get(0))) { //If normal mode is chosen
-			currentPanel = new ColorChooser();
+			currentPanel = new ColorChooserNormal();
 			setTitle("Normal mode");
 			menuItems.get(currentPanelIndex).setEnabled(true);
 			currentPanelIndex = 0;

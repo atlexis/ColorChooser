@@ -13,54 +13,48 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
- * Alpha mode of the application.
- * Choose color from RGBA-sliders and see hex-code and color-preview
- * @author Alexander
+ * Main mode of the application.
+ * Choose color from RGB-sliders and see the Hex-code and a preview of the color
+ * @author Alexander Libot
  *
  */
 @SuppressWarnings("serial")
-public class ColorChooserAlpha extends ColorChooser {
-	
-	private int red;
-	private int green;
-	private int blue;
-	private int alpha;
-	
+public class ColorChooserNormal extends ColorChooser {
+
 	private JLabel lblColorString;
 
-	public ColorChooserAlpha() {
+	public ColorChooserNormal() {
 		initUI();
 	}
 	
 	/**
-	 * Initializes UI
+	 * Initializes the UI
 	 */
 	private void initUI() {
 		
+		//Color preview
 		JPanel pnlColor = new JPanel(new BorderLayout());
-		JLabel lblColor = new JLabel();
+		JLabel lblColor = new JLabel(); //Color preview
 		lblColor.setPreferredSize(new Dimension(200,200));
 		lblColorString = new JLabel();
 		lblColorString.setHorizontalAlignment((JLabel.CENTER));
 		pnlColor.add(lblColor, BorderLayout.CENTER);
 		pnlColor.add(lblColorString, BorderLayout.SOUTH);
 		
-		
+		//Sliders
 		JSlider sldRed = new JSlider(SwingConstants.HORIZONTAL, 0, 255, 0);
 		JSlider sldGreen = new JSlider(SwingConstants.HORIZONTAL, 0, 255, 0);
 		JSlider sldBlue = new JSlider(SwingConstants.HORIZONTAL, 0, 255, 0);
-		JSlider sldAlpha = new JSlider(SwingConstants.HORIZONTAL, 0, 255, 255);
 		
 		red = sldRed.getValue();
 		green = sldGreen.getValue();
 		blue = sldBlue.getValue();
-		alpha = sldAlpha.getValue();
 		updateColorStringLabel();
 		
 		sldRed.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				red = sldRed.getValue();
-				lblColor.setBackground(new Color(sldRed.getValue(), sldGreen.getValue(), sldBlue.getValue(), sldAlpha.getValue()));
+				lblColor.setBackground(new Color(sldRed.getValue(), sldGreen.getValue(), sldBlue.getValue()));
 				updateColorStringLabel();
 			}
 		});
@@ -68,7 +62,7 @@ public class ColorChooserAlpha extends ColorChooser {
 		sldGreen.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				green = sldGreen.getValue();
-				lblColor.setBackground(new Color(sldRed.getValue(), sldGreen.getValue(), sldBlue.getValue(), sldAlpha.getValue()));
+				lblColor.setBackground(new Color(sldRed.getValue(), sldGreen.getValue(), sldBlue.getValue()));
 				updateColorStringLabel();
 			}
 		});
@@ -76,35 +70,31 @@ public class ColorChooserAlpha extends ColorChooser {
 		sldBlue.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				blue = sldBlue.getValue();
-				lblColor.setBackground(new Color(sldRed.getValue(), sldGreen.getValue(), sldBlue.getValue(), sldAlpha.getValue()));
-				updateColorStringLabel();
-			}
-		});
-		
-		sldAlpha.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent e) {
-				alpha = sldAlpha.getValue();
-				lblColor.setBackground(new Color(sldRed.getValue(), sldGreen.getValue(), sldBlue.getValue(), sldAlpha.getValue()));
+				lblColor.setBackground(new Color(sldRed.getValue(), sldGreen.getValue(), sldBlue.getValue()));
 				updateColorStringLabel();
 			}
 		});
 		
 		JPanel pnlSliders = new JPanel();
-		pnlSliders.setLayout(new GridLayout(4,1));
+		pnlSliders.setLayout(new GridLayout(3,1));
 		pnlSliders.add(sldRed);
 		pnlSliders.add(sldGreen);
 		pnlSliders.add(sldBlue);
-		pnlSliders.add(sldAlpha);
 		
-		lblColor.setBackground(new Color(sldRed.getValue(), sldGreen.getValue(), sldBlue.getValue(), sldAlpha.getValue()));
+		//Init color-preview
+		lblColor.setBackground(new Color(sldRed.getValue(), sldGreen.getValue(), sldBlue.getValue()));
 		lblColor.setOpaque(true);
 		
+		//Init app-panel
 		setLayout(new BorderLayout());
 		add(pnlColor, BorderLayout.CENTER);
 		add(pnlSliders, BorderLayout.SOUTH);	
 	}
 	
+	/**
+	 * Update the hex-code label with values from sliders.
+	 */
 	private void updateColorStringLabel() {
-		lblColorString.setText(String.format("%02X" + "%02X" + "%02X" + "%02X", red, green, blue, alpha));
+		lblColorString.setText(String.format("%02X" + "%02X" + "%02X", red, green, blue));
 	}
 }
