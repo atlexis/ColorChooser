@@ -6,6 +6,6 @@ The application has three modes:
 - Normal mode - Has three sliders for selecting RGB color
 - Alpha mode - Has four sliders for selecting RGBA color
 - CSS mode - Has four sliders with Alpha slider in increments of 0.1 between 0 and 1.
- - This mode does not display the correct colors, so do not use
+	- This mode does not display the correct colors, so do not use
 
 Only tested on macOS, and will probably not work on any other OS.
